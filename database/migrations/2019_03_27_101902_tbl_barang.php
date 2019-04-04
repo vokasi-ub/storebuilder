@@ -17,6 +17,7 @@ class TblBarang extends Migration
             $table->string('kode_barang', 15)->primary();
             $table->string('kode_kategori',15);
             $table->string('kode_supplier',15);
+            $table->string('foto_barang', 15);
             $table->string('nama_barang',50);
             $table->integer('stok_barang');
             $table->string('satuan_barang',10);

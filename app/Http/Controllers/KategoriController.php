@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\KategoriModel;
+use DataTables;
 
 class KategoriController extends Controller
 {
@@ -13,7 +15,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('dashboard.dashboard');
+        
+        return view('dashboard.datakategori');
+       
     }
 
     /**
@@ -23,7 +27,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        //
+        $model = new KategoriModel();
+        return view('dashboard.form_kategori', compact('model'));
     }
 
     /**
@@ -34,7 +39,15 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+        'kode_kategori' => 'required|string|max:255',
+        'nama_kategori' => 'required|string|max:255|',
+        'deskripsi_kategori' => 'required|string|max:255|'
+        
+    ]);
+
+    $model = KategoriModel::create($request->all());
+    return $model;
     }
 
     /**
@@ -43,9 +56,10 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_kategori)
     {
-        //
+        $model = KategoriModel::findOrFail($id_kategori);
+        return view('dashboard.show_kategori', compact('model'));
     }
 
     /**
@@ -54,9 +68,10 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_kategori)
     {
-        //
+        $model = KategoriModel::findOrFail($id_kategori);
+        return view('dashboard.form_kategori', compact('model'));
     }
 
     /**
@@ -66,9 +81,15 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_kategori)
     {
-        //
+        $this->validate($request, [
+            'kode_kategori' => 'required|string|max:255',
+            'nama_kategori' => 'required|string|max:255|',
+            'deskripsi_kategori' => 'required|string|max:255|'
+        ]);
+        $model = KategoriModel::findOrFail($id_kategori);
+        $model->update($request->all());
     }
 
     /**
@@ -77,8 +98,28 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_kategori)
     {
-        //
+        $model = KategoriModel::findOrFail($id_kategori);
+        $model->delete();
     }
+
+    public function dataTable()
+    {
+        $model = KategoriModel::query();
+        return DataTables::of($model)
+            ->addColumn('action', function ($model) {
+                return view('layouts._action_kategori', [
+                    'model' => $model,
+                    'url_show' => route('kategoribarang.show', $model->id_kategori),
+                    'url_edit' => route('kategoribarang.edit', $model->id_kategori),
+                    'url_destroy' => route('kategoribarang.destroy', $model->id_kategori)
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    
 }

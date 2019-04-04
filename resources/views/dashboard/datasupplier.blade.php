@@ -1,47 +1,39 @@
 @extends('layouts.master')
 @section('datasupplier')
 
-<div class="main-inner">
-    <div class="container">
-      <div class="row">
-            <div class="widget-content widget-table action-table">
-                <div class="widget-header"> <i class="icon-th-list"></i>
-              <h3>Data Kategori</h3>
-            </div>
-            <!-- /widget-header -->
-            <div class="widget-content">
-              <table style="width:100%" id="datatable" class="table table-striped table-bordered"  >
+<section class="wrapper">
+<h3><i class="fa fa-angle-right"></i> Data Supplier Barang</h3>
+        <div class="row mb">
+          <!-- page start-->
+          <div class="content-panel">
+            <div class="adv-table">
+            <a href="{{ route('supplierbarang.create') }}" class="btn btn-blue modal-show"  title="Tambah Data Supplier"><i class="icon-plus"></i> Tambah Data Supplier</a>
+              <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="datatable">
                 <thead>
-                    <tr>
+                  <tr>
                     <th>NO</th>  
                     <th>Kode Supplier</th>
-                    <th>Nama Supplier</th>
-                    <th>Alamat Supplier</th>
-                    <th>Deskripsi Supplier</th>
-                    <th>Dibuat pada</th>
-                    <th>Diperbarui pada</th>
-                    <th class="td-actions"> </th>
-                  </tr>
+                    <th class="hidden-phone">Nama Supplier</th>
+                    <th class="hidden-phone">Alamat Supplier</th>
+                    <th class="hidden-phone">Deskripsi Supplier</th>
+                    <th class="hidden-phone"> Action </th>
+                </tr>
                 </thead>
                 <tbody>
-              
-                 
-              
-                                  
-                </tbody>
+                  
+                  </tbody>
               </table>
             </div>
-            <!-- /widget-content --> 
           </div>
         </div>
-    </div>
-
+</section>
+ 
 @endsection
 
 @push('scripts')
     <script>
         $('#datatable').DataTable({
-            responsive: true,
+			      responsive: true,
             processing: true,
             serverSide: true,
             ajax: "{{ route('tabel.supplierbarang') }}",
@@ -51,10 +43,11 @@
                 {data: 'nama_supplier', name: 'nama_supplier'},
                 {data: 'alamat_supplier', name: 'alamat_supplier'},
                 {data: 'deskripsi_supplier', name: 'deskripsi_supplier'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'updated_at', name: 'updated_at'},
                 {data: 'action', name: 'action'}
             ]
         });
+        
     </script>
 @endpush
+
+

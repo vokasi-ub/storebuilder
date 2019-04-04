@@ -1,195 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<title>Dashboard - Bootstrap Admin Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="Dashboard">
+  <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <title>Dashio - Bootstrap Admin Template</title>
 
-<meta name="csrf-token" content="{{ csrf_token() }}">
+  {{-- CSRF TOKEN --}}
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<link rel="stylesheet" href="{{ asset('assets/dashboard/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+  <!-- Datatables --> 
+  <link href="{{ asset ('assets/admin/lib/advanced-datatable/css/demo_page.css') }}" rel="stylesheet" />
+  <link href="{{ asset ('assets/admin/lib/advanced-datatable/css/demo_table.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset ('assets/admin/lib/advanced-datatable/css/DT_bootstrap.css') }}" />
+	<link href="{{ asset('assets/admin/vendor/datatables/datatables.min.css') }}" rel="stylesheet">
+  <!-- Favicons -->
+  <link href="{{ asset ('assets/admin/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset ('assets/admin/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-<link href="{{ asset('assets/admin/css/bootstrap.min.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/admin/css/bootstrap-responsive.min.css') }}" rel="stylesheet">
-<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600"
-        rel="stylesheet">
-<link href="{{ asset('assets/admin/css/font-awesome.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/admin/css/style.css') }}" rel="stylesheet">
-<link href="{{ asset('assets/admin/css/pages/dashboard.css') }}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{{ asset ('assets/admin/lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <!--external css-->
+  <link href="{{ asset ('assets/admin/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="{{ asset ('assets/admin/css/zabuto_calendar.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset ('assets/admin/lib/gritter/css/jquery.gritter.css') }}" />
+  <!-- Custom styles for this template -->
+  <link href="{{ asset ('assets/admin/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset ('assets/admin/css/style-responsive.css') }}" rel="stylesheet">
+  <script src="{{ asset ('assets/admin/lib/chart-master/Chart.js') }}"></script>
 
- <!-- Datatables -->
- <link href="{{ asset('assets/admin/vendor/datatables/datatables.min.css') }}" rel="stylesheet">
+  <!-- =======================================================
+    Template Name: Dashio
+    Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
+    Author: TemplateMag.com
+    License: https://templatemag.com/license/
+  ======================================================= -->
 
-@stack('styles')
+  @stack('styles')
 
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 </head>
+
 <body>
-<div class="navbar navbar-fixed-top">
- @include('layouts.navbar')
-  <!-- /navbar-inner --> 
-</div>
-<!-- /navbar -->
-<div class="subnavbar">
- @include('layouts.subnavbar')
-    <!-- /container --> 
-  </div>
-  <!-- /subnavbar-inner --> 
-</div>
-<!-- /subnavbar -->
-<div class="main">
-  @yield('content')
-  @yield('datasupplier')
-</div>
-<!-- /main -->
-<div class="extra">
-  @include('layouts.extra')
-  <!-- /extra-inner --> 
-</div>
-<!-- /extra -->
-<div class="footer">
- @include('layouts.footer')
-  <!-- /footer-inner --> 
-</div>
-<!-- /footer --> 
-<!-- Le javascript
-================================================== --> 
-<!-- Placed at the end of the document so the pages load faster --> 
-<script src="{{ asset('assets/admin/js/jquery-1.7.2.min.js') }}"></script> 
-<script src="{{ asset('assets/admin/js/excanvas.min.js') }}"></script> 
-<script src="{{ asset('assets/admin/js/chart.min.js') }}" type="text/javascript"></script> 
-<script src="{{ asset('assets/admin/js/bootstrap.js') }}"></script>
-<script language="javascript" type="text/javascript" src="{{ asset('assets/admin/js/full-calendar/fullcalendar.min.js') }}"></script>
- 
-<script src="{{ asset('assets/admin/js/base.js') }}"></script> 
+  <section id="container">
+    <!-- **********************************************************************************************************************************************************
+        TOP BAR CONTENT & NOTIFICATIONS
+        *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+      @include('layouts.header')
+    </header>
+    <!--header end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+      @include('layouts.sidebar')
+    </aside>
+    <!--sidebar end-->
+    <!-- **********************************************************************************************************************************************************
+        MAIN CONTENT
+        *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+			@yield('content')
+      @yield('datasupplier')
+      @yield('datakategori')
+    </section>
+    <!--main content end-->
+      @include('layouts._modal')
+    <!--footer start-->
+    <footer class="site-footer">
+      @include('layouts.footer')
+    </footer>
+    <!--footer end-->
+  </section>
+  <!-- js placed at the end of the document so the pages load faster -->
+  <script src="{{ asset ('assets/admin/lib/jquery/jquery.min.js') }}"></script>
 
-<script src="{{ asset('assets/admin/vendor/datatables/datatables.min.js') }}"></script>
+  <script src="{{ asset ('assets/admin/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script class="include" type="text/javascript" src="{{ asset ('assets/admin/lib/jquery.dcjqaccordion.2.7.js') }}"></script>
+  <script src="{{ asset ('assets/admin/lib/jquery.scrollTo.min.js') }}"></script>
+  <script src="{{ asset ('assets/admin/lib/jquery.nicescroll.js') }}" type="text/javascript"></script>
+  <script src="{{ asset ('assets/admin/lib/jquery.sparkline.js') }}"></script>
+  <!--common script for all pages-->
+  <script src="{{ asset ('assets/admin/lib/common-scripts.js') }}"></script>
+  <script type="text/javascript" src="{{ asset ('assets/admin/lib/gritter/js/jquery.gritter.js') }}"></script>
+  <script type="text/javascript" src="{{ asset ('assets/admin/lib/gritter-conf.js') }} "></script>
+  <!--script for this page-->
+  <script src="{{ asset ('assets/admin/lib/sparkline-chart.js') }}"></script>
+  <script src="{{ asset ('assets/admin/lib/zabuto_calendar.js') }}"></script>
 
-<script>     
+  
 
-        var lineChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    pointColor: "rgba(220,220,220,1)",
-				    pointStrokeColor: "#fff",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    pointColor: "rgba(151,187,205,1)",
-				    pointStrokeColor: "#fff",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }
-
-        var myLine = new Chart(document.getElementById("area-chart").getContext("2d")).Line(lineChartData);
-
-
-        var barChartData = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
-            datasets: [
-				{
-				    fillColor: "rgba(220,220,220,0.5)",
-				    strokeColor: "rgba(220,220,220,1)",
-				    data: [65, 59, 90, 81, 56, 55, 40]
-				},
-				{
-				    fillColor: "rgba(151,187,205,0.5)",
-				    strokeColor: "rgba(151,187,205,1)",
-				    data: [28, 48, 40, 19, 96, 27, 100]
-				}
-			]
-
-        }    
-
-        $(document).ready(function() {
-        var date = new Date();
-        var d = date.getDate();
-        var m = date.getMonth();
-        var y = date.getFullYear();
-        var calendar = $('#calendar').fullCalendar({
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-          },
-          selectable: true,
-          selectHelper: true,
-          select: function(start, end, allDay) {
-            var title = prompt('Event Title:');
-            if (title) {
-              calendar.fullCalendar('renderEvent',
-                {
-                  title: title,
-                  start: start,
-                  end: end,
-                  allDay: allDay
-                },
-                true // make the event "stick"
-              );
-            }
-            calendar.fullCalendar('unselect');
-          },
-          editable: true,
-          events: [
-            {
-              title: 'All Day Event',
-              start: new Date(y, m, 1)
-            },
-            {
-              title: 'Long Event',
-              start: new Date(y, m, d+5),
-              end: new Date(y, m, d+7)
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d-3, 16, 0),
-              allDay: false
-            },
-            {
-              id: 999,
-              title: 'Repeating Event',
-              start: new Date(y, m, d+4, 16, 0),
-              allDay: false
-            },
-            {
-              title: 'Meeting',
-              start: new Date(y, m, d, 10, 30),
-              allDay: false
-            },
-            {
-              title: 'Lunch',
-              start: new Date(y, m, d, 12, 0),
-              end: new Date(y, m, d, 14, 0),
-              allDay: false
-            },
-            {
-              title: 'Birthday Party',
-              start: new Date(y, m, d+1, 19, 0),
-              end: new Date(y, m, d+1, 22, 30),
-              allDay: false
-            },
-            {
-              title: 'EGrappler.com',
-              start: new Date(y, m, 28),
-              end: new Date(y, m, 29),
-              url: 'http://EGrappler.com/'
-            }
-          ]
-        });
+	<!-- Datatables -->
+	
+	<script type="text/javascript" language="javascript" src="{{ asset ('assets/admin/lib/advanced-datatable/js/jquery.dataTables.js') }}"></script>
+  <script type="text/javascript" src="{{ asset ('assets/admin/lib/advanced-datatable/js/DT_bootstrap.js') }}"></script>
+	<script src="{{ asset('assets/admin/lib/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('assets/admin/lib/jquery.dataTables.bootstrap.min.js') }}"></script>
+	
+	<script type="text/javascript">
+    $(document).ready(function() {
+      var unique_id = $.gritter.add({
+        // (string | mandatory) the heading of the notification
+        title: 'Welcome to Dashio!',
+        // (string | mandatory) the text inside the notification
+        text: 'Hover me to enable the Close Button. You can hide the left sidebar clicking on the button next to the logo.',
+        // (string | optional) the image to display on the left
+        image: 'img/ui-sam.jpg',
+        // (bool | optional) if you want it to fade out on its own or just sit there
+        sticky: false,
+        // (int | optional) the time you want it to be alive for before fading out
+        time: 8000,
+        // (string | optional) the class name you want to apply to that specific message
+        class_name: 'my-sticky-class'
       });
-    </script><!-- /Calendar -->
+
+      return false;
+    });
+  </script>
+  <script type="application/javascript">
+    $(document).ready(function() {
+      $("#date-popover").popover({
+        html: true,
+        trigger: "manual"
+      });
+      $("#date-popover").hide();
+      $("#date-popover").click(function(e) {
+        $(this).hide();
+      });
+
+      $("#my-calendar").zabuto_calendar({
+        action: function() {
+          return myDateFunction(this.id, false);
+        },
+        action_nav: function() {
+          return myNavFunction(this.id);
+        },
+        ajax: {
+          url: "show_data.php?action=1",
+          modal: true
+        },
+        legend: [{
+            type: "text",
+            label: "Special event",
+            badge: "00"
+          },
+          {
+            type: "block",
+            label: "Regular event",
+          }
+        ]
+      });
+    });
+
+    function myNavFunction(id) {
+      $("#date-popover").hide();
+      var nav = $("#" + id).data("navigation");
+      var to = $("#" + id).data("to");
+      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+	</script>
+	<script src="{{ asset('js/app.js') }}"></script>
+
+
+    <!-- Sweetalert2 -->
+  <script src="{{ asset('assets/admin/vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
   @stack('scripts')
+
 </body>
+
 </html>

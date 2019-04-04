@@ -19,3 +19,11 @@ Route::resource('/', 'KategoriController');
 Route::resource('supplierbarang', 'SupplierController');
 
 Route::get('tabel/supplierbarang', 'SupplierController@dataTable')->name('tabel.supplierbarang');
+
+Route::resource('kategoribarang', 'KategoriController');
+
+Route::get('tabel/kategoribarang', 'KategoriController@dataTable')->name('tabel.kategoribarang');
+
+Route::resource('barang', 'BarangController');
+
+Route::get('tabel/barang', 'BarangController@dataTable')->name('tabel.barang');

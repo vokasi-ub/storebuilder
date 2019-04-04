@@ -26,7 +26,8 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        $model = new SupplierModel();
+        return view('dashboard.form', compact('model'));
     }
 
     /**
@@ -37,7 +38,16 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode_supplier' => 'required|string|max:255',
+            'nama_supplier' => 'required|string|max:255|',
+            'alamat_supplier' => 'required|string|max:255|',
+            'deskripsi_supplier' => 'required|string|max:255|'
+            
+        ]);
+
+        $model = SupplierModel::create($request->all());
+        return $model;
     }
 
     /**
@@ -48,6 +58,8 @@ class SupplierController extends Controller
      */
     public function show($id_supplier)
     {
+        $model = SupplierModel::findOrFail($id_supplier);
+        return view('dashboard.show', compact('model'));
        
     }
 
@@ -57,9 +69,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_supplier)
     {
-        //
+        $model = SupplierModel::findOrFail($id_supplier);
+        return view('dashboard.form', compact('model'));
     }
 
     /**
@@ -69,9 +82,16 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_supplier)
     {
-        //
+        $this->validate($request, [
+            'kode_supplier' => 'required|string|max:255',
+            'nama_supplier' => 'required|string|max:255|',
+            'alamat_supplier' => 'required|string|max:255|',
+            'deskripsi_supplier' => 'required|string|max:255|'
+        ]);
+        $model = SupplierModel::findOrFail($id_supplier);
+        $model->update($request->all());
     }
 
     /**
@@ -80,9 +100,12 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_supplier)
     {
         
+        $model = SupplierModel::findOrFail($id_supplier);
+        $model->delete();
+        // User::destroy($id);
     }
 
     public function dataTable()
