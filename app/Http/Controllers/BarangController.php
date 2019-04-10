@@ -4,10 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\BarangModel;
+use App\KategoriModel;
+use App\SupplierModel;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,17 +27,9 @@ class BarangController extends Controller
         return view('dashboard.databarang');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $model = new BarangModel();
-        return view('dashboard.form_barang', compact('model'));
-    }
+    
 
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -36,20 +37,33 @@ class BarangController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { $this->validate($request, [
+    {  
+        
+        $this->validate($request, [
         'kode_barang' => 'required|string|max:255',
         'kode_kategori' => 'required|string|max:255|',
         'kode_supplier' => 'required|string|max:255|',
-        'foto_barang' => 'image|nullable|max:1999',
+        'foto_barang' => 'required|image|max:2048',
         'nama_barang' => 'required|string|max:255|',
         'stok_barang' => 'required|integer|',
         'satuan_barang' => 'required|string|max:255|',
         'harga_barang' => 'required|integer|'
+
+        
         
     ]);
-
-    $model = BarangModel::create($request->all());
-    return $model;
+    
+    $input = $request->all();
+    $input['foto_barang'] = null;
+    if ($request->hasFile('foto_barang')){
+        $input['foto_barang'] = '/upload/image/'.str_slug($input['nama_barang'], '-').'.'.$request->foto_barang->getClientOriginalExtension();
+        $request->foto_barang->move(public_path('/upload/image/'), $input['foto_barang']);
+    }
+    BarangModel::create($input);
+    return response()->json([
+        'success' => true,
+        'message' => 'Contact Created'
+    ]);
     }
 
     /**
@@ -58,9 +72,9 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($kode_barang)
+    public function show($id_barang)
     {
-        $model = BarangModel::findOrFail($kode_barang);
+        $model = BarangModel::findOrFail($id_barang);
         return view('dashboard.show_barang', compact('model'));
     }
 
@@ -70,10 +84,10 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($kode_barang)
+    public function edit($id_barang)
     {
-        $model = BarangModel::findOrFail($kode_barang);
-        return view('dashboard.form_barang', compact('model'));
+        $model = BarangModel::findOrFail($id_barang);
+        return $model;
     }
 
     /**
@@ -83,22 +97,37 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $kode_barang)
+    public function update(Request $request, $id_barang)
     {
         $this->validate($request, [
             'kode_barang' => 'required|string|max:255',
             'kode_kategori' => 'required|string|max:255|',
             'kode_supplier' => 'required|string|max:255|',
-            'foto_barang' => 'image|nullable|max:1999',
+            'foto_barang' => 'required|image|max:2048',
             'nama_barang' => 'required|string|max:255|',
             'stok_barang' => 'required|integer|',
             'satuan_barang' => 'required|string|max:255|',
             'harga_barang' => 'required|integer|'
+    
+            
             
         ]);
-
-        $model = BarangModel::findOrFail($kode_barang);
-        $model->update($request->all());
+        
+        $input = $request->all();
+        $model = BarangModel::findOrFail($id_barang);
+        $input['foto_barang'] = $model->foto_barang;
+        if ($request->hasFile('foto_barang')){
+            if (!$model->foto_barang == NULL){
+                unlink(public_path($model->foto_barang));
+            }
+            $input['foto_barang'] = '/upload/image/'.str_slug($input['nama_barang'], '-').'.'.$request->foto_barang->getClientOriginalExtension();
+            $request->foto_barang->move(public_path('/upload/image/'), $input['foto_barang']);
+        }
+        $model->update($input);
+        return response()->json([
+            'success' => true,
+            'message' => 'Contact Updated'
+        ]);
     }
 
     /**
@@ -107,26 +136,35 @@ class BarangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($kode_barang)
+    public function destroy($id_barang)
     {
-        $model = BarangModel::findOrFail($kode_barang);
-        $model->delete(); 
+        $model = BarangModel::findOrFail($id_barang);
+        if (!$model->foto_barang == NULL){
+            unlink(public_path($model->foto_barang));
+        }
+        BarangModel::destroy($id_barang);
+        return response()->json([
+            'success' => true,
+            'message' => 'Contact Deleted'
+        ]);
     }
 
     public function dataTable()
     {
         $model = BarangModel::query();
         return DataTables::of($model)
-            ->addColumn('action', function ($model) {
-                return view('layouts._action_barang', [
-                    'model' => $model,
-                    'url_show' => route('barang.show', $model->kode_barang),
-                    'url_edit' => route('barang.edit', $model->kode_barang),
-                    'url_destroy' => route('barang.destroy', $model->kode_barang)
-                ]);
-            })
-            ->addIndexColumn()
-            ->rawColumns(['action'])
-            ->make(true);
+        ->addColumn('show_image', function($model){
+            if ($model->foto_barang == NULL){
+                return 'No Image';
+            }
+            return '<img class="rounded-square" width="70" height="70" src="'. url($model->foto_barang) .'" alt="">';
+        })
+        ->addColumn('action', function($model){
+            return '<a href="#" class="btn"><i class="ace-icon fa fa-eye bigger-120"></i></a> ' .
+                   '<a onclick="editForm('. $model->id_barang .')" class="btn"><i class="ace-icon fa fa-pencil bigger-120"></i> </a> ' .
+                   '<a onclick="deleteData('. $model->id_barang .')" class="btn"><i class="ace-icon fa fa-trash-o bigger-120"> </a>';
+        })
+        
+            ->rawColumns(['show_image','action'])->make(true);
     }
 }

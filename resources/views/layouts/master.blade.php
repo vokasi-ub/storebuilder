@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Dashio - Bootstrap Admin Template</title>
+  <title>STORE BUILDER ADMIN </title>
 
   {{-- CSRF TOKEN --}}
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -102,7 +102,10 @@
   <script type="text/javascript" src="{{ asset ('assets/admin/lib/advanced-datatable/js/DT_bootstrap.js') }}"></script>
 	<script src="{{ asset('assets/admin/lib/jquery.dataTables.min.js') }}"></script>
 	<script src="{{ asset('assets/admin/lib/jquery.dataTables.bootstrap.min.js') }}"></script>
-	
+  
+  {{-- Validator --}}
+  <script src="{{ asset('assets/admin/validator/validator.min.js') }}"></script>
+
 	<script type="text/javascript">
     $(document).ready(function() {
       var unique_id = $.gritter.add({
@@ -164,6 +167,8 @@
       var to = $("#" + id).data("to");
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
+
+    
 	</script>
 	<script src="{{ asset('js/app.js') }}"></script>
 

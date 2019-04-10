@@ -15,7 +15,7 @@ class TblSupplierbarang extends Migration
     {
         Schema::create('tbl_supplierbarang', function (Blueprint $table){
             $table->increments('id_supplier');
-            $table->string('kode_supplier', 15);
+            $table->string('kode_supplier')->unique();
             $table->string('nama_supplier', 50);
             $table->text('alamat_supplier');
             $table->text('deskripsi_supplier');

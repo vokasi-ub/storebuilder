@@ -25,7 +25,7 @@ class DropdownKategori extends ServiceProvider
     public function boot()
     {
         view()->composer('*',function($view){            
-            $view->with('kategoriarray', KategoriModel::all('nama_kategori'));       
+            $view->with('kategoriarray', KategoriModel::pluck('nama_kategori','kode_kategori'));       
          });
     }
 }

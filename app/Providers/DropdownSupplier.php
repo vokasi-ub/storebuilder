@@ -25,7 +25,7 @@ class DropdownSupplier extends ServiceProvider
     public function boot()
     {
         view()->composer('*',function($view){            
-            $view->with('supplierarray', SupplierModel::all('nama_supplier'));       
+            $view->with('supplierarray', SupplierModel::pluck('nama_supplier','kode_supplier'));       
          });
     }
 }

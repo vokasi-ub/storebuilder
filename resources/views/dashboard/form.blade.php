@@ -9,11 +9,6 @@
     </div>
     
     <div class="form-group">
-         <label for="" class="control-label">Kode Supplier</label>                                      
-         {!! Form::select('nama_supplier',  $supplierarray, null, ['class' => 'form-control', 'id' => 'nama_supplier']) !!}      
-    </div>
-
-    <div class="form-group">
         <label for="" class="control-label">Nama Supplier</label>
         {!! Form::text('nama_supplier', null, ['class' => 'form-control', 'id' => 'nama_supplier']) !!}
     </div>

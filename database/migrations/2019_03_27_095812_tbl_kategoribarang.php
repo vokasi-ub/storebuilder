@@ -15,7 +15,7 @@ class TblKategoribarang extends Migration
     {
         Schema::create('tbl_kategoribarang', function (Blueprint $table){
             $table->increments('id_kategori');
-            $table->string('kode_kategori', 15);
+            $table->string('kode_kategori')->unique();
             $table->string('nama_kategori', 50);
             $table->text('deskripsi_kategori');
             $table->timestamps();

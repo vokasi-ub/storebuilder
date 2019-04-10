@@ -14,10 +14,17 @@ class TblBarang extends Migration
     public function up()
     {
         Schema::create('tbl_barang', function (Blueprint $table){
-            $table->string('kode_barang', 15)->primary();
-            $table->string('kode_kategori',15);
-            $table->string('kode_supplier',15);
-            $table->string('foto_barang', 15);
+            $table->increments('id_barang');
+            $table->string('kode_barang', 15)->unique();
+            $table->string('kode_kategori');
+            $table->foreign('kode_kategori')
+            ->references('kode_kategori')
+            ->on('tbl_kategoribarang');
+            $table->string('kode_supplier');
+            $table->foreign('kode_supplier')
+            ->references('kode_supplier')
+            ->on('tbl_supplierbarang');
+            $table->string('foto_barang', 1999);
             $table->string('nama_barang',50);
             $table->integer('stok_barang');
             $table->string('satuan_barang',10);

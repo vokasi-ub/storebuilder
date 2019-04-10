@@ -13,7 +13,17 @@ class TblTransaksibarang extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('tbl_transaksibarang', function (Blueprint $table){
+            $table->increments('id_transaksi');
+            $table->string('kode_transaksi')->unique();
+            $table->string('kode_barang', 15);
+            $table->foreign('kode_barang')
+            ->references('kode_barang')
+            ->on('tbl_barang');
+            $table->integer('jumlah_barang');
+            $table->integer('total_harga');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class TblTransaksibarang extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('tbl_transaksibarang');
     }
 }
