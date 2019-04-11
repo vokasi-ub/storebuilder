@@ -180,6 +180,7 @@ return [
 
         App\Providers\DropdownKategori::class,
         App\Providers\DropdownSupplier::class,
+        App\Providers\DropdownBarang::class,
 
     ],
 

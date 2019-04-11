@@ -22,6 +22,7 @@ class TblTransaksibarang extends Migration
             ->on('tbl_barang');
             $table->integer('jumlah_barang');
             $table->integer('total_harga');
+            $table->string('bukti_nota', 1999);
             $table->timestamps();
         });
     }

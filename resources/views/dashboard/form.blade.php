@@ -20,7 +20,7 @@
 
     <div class="form-group">
         <label for="" class="control-label">Deskripsi Supplier</label>
-        {!! Form::text('deskripsi_supplier', null, ['class' => 'form-control', 'id' => 'deskripsi_supplier']) !!}
+        {!! Form::textarea('deskripsi_supplier', null, ['class' => 'form-control', 'id' => 'deskripsi_supplier']) !!}
     </div>
 
 {!! Form::close() !!}

@@ -4,7 +4,7 @@
           <p class="centered"><a href="profile.html"><img src="{{asset('assets/admin/img/ui-sam.jpg') }}" class="img-circle" width="80"></a></p>
           <h5 class="centered">Sam Soffes</h5>
           <li class="mt">
-            <a class="active" href="index.html">
+            <a class="active" href="{{ route('home') }}">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
@@ -24,6 +24,8 @@
               <li><a href="{{ route('data.supplierbarang') }}">Data Supplier</a></li>
               <li><a href="{{ route('data.kategoribarang') }}">Data Kategori</a></li>
               <li><a href="{{ route('data.barang') }}">Data Barang</a></li>
+              <li><a href="{{ route('data.supplaibarang') }}">Data Supplai Barang</a></li>
+              <li><a href="{{ route('data.transaksibarang') }}">Data Transaksi Barang</a></li>
             </ul>
           </li>
           <li>

@@ -69,6 +69,8 @@
 			@yield('content')
       @yield('datasupplier')
       @yield('datakategori')
+      @yield('datasupplai')
+      @yield('datatransaksi')
     </section>
     <!--main content end-->
       @include('layouts._modal')

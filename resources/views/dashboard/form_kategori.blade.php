@@ -15,7 +15,7 @@
 
     <div class="form-group">
         <label for="" class="control-label">Deskripsi Kategori</label>
-        {!! Form::text('deskripsi_kategori', null, ['class' => 'form-control', 'id' => 'deskripsi_kategori']) !!}
+        {!! Form::textarea('deskripsi_kategori', null, ['class' => 'form-control', 'id' => 'deskripsi_kategori']) !!}
     </div>
 
 {!! Form::close() !!}
