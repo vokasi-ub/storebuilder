@@ -58,3 +58,14 @@ Route::resource('transaksibarang', 'TransaksiController', [
 Route::get('data/transaksibarang', 'TransaksiController@index')->name('data.transaksibarang');
 Route::get('tabel/transaksibarang', 'TransaksiController@dataTable')->name('tabel.transaksibarang');
 /** --------------------- */
+
+
+Route::get('charts', 'ChartController@index')->name('chart.index');
+Route::get('gmap', 'GmapController@index')->name('gmap.index');
+
+
+Route::get('export', 'BarangController@export')->name('export');
+
+Route::get('importExportView', 'BarangController@importExportView');
+
+Route::post('import', 'BarangController@import')->name('import');

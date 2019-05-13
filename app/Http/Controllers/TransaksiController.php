@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TransaksiModel;
 use DataTables;
+use Excel;
+
 
 class TransaksiController extends Controller
 {
@@ -13,6 +15,11 @@ class TransaksiController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function list(){
+        $transaksi = TransaksiModel::get();
+        return view('dashboard.datatransaksi', compact('transaksi'));
     }
 
     

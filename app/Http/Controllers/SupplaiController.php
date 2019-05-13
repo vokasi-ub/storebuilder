@@ -157,7 +157,7 @@ class SupplaiController extends Controller
             return '<img class="rounded-square" width="70" height="70" src="'. url($model->bukti_nota) .'" alt="">';
         })
         ->addColumn('action', function($model){
-            return '<a href="#" class="btn"><i class="ace-icon fa fa-eye bigger-120"></i></a> ' .
+            return '<a href="" class="btn"><i class="ace-icon fa fa-eye bigger-120"></i></a> ' .
                    '<a onclick="editForm('. $model->id_supplai .')" class="btn"><i class="ace-icon fa fa-pencil bigger-120"></i> </a> ' .
                    '<a onclick="deleteData('. $model->id_supplai .')" class="btn"><i class="ace-icon fa fa-trash-o bigger-120"> </a>';
         })

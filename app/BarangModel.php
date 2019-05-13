@@ -12,12 +12,12 @@ class BarangModel extends Model
     
     public function kategori()
     {
-        return $this->belongsTo(KategoriModel::class);
+        return $this->belongsTo(KategoriModel::class, 'id_kategori','kode_kategori');
     }
 
     public function supplier()
     {
-        return $this->belongsTo(SupplierModel::class);
+        return $this->belongsTo(SupplierModel::class, 'id_supplier','kode_supplier');
     }
    
 }

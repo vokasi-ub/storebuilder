@@ -2,12 +2,12 @@
 @section('datatransaksi')
 
 <section class="wrapper">
-<h3><i class="fa fa-angle-right"></i> Data Supplai Barang</h3>
+<h3><i class="fa fa-angle-right"></i> Data Transaksi Barang</h3>
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
             <div class="adv-table">
-            <a onclick="addForm()" class="btn btn-primary pull-left" style="margin-left: 8px; margin-top: 8px; margin-bottom: 8px;">Tambah Supplai Barang</a>
+            <a onclick="addForm()" class="btn btn-primary pull-left" style="margin-left: 8px; margin-top: 8px; margin-bottom: 8px;">Tambah Transaksi Barang</a>
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="datatable">
                 <thead>
                   <tr>
@@ -95,7 +95,7 @@ var table =$('#datatable').DataTable({
               confirmButtonText: 'Yes, delete it!'
           }).then(function () {
               $.ajax({
-                  url : "{{ url('barang') }}" + '/' + id_transaksi,
+                  url : "{{ url('transaksibarang') }}" + '/' + id_transaksi,
                   type : "POST",
                   data : {'_method' : 'DELETE', '_token' : csrf_token},
                   success : function(data) {

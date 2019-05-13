@@ -44,6 +44,8 @@
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
+
+                    <img src="" id="show_image">
                 
 
                     <div class="form-group">

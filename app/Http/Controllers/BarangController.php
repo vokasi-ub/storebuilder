@@ -8,6 +8,11 @@ use App\KategoriModel;
 use App\SupplierModel;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
+use App\Exports\BarangExport;
+
+use App\Imports\BarangImport;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangController extends Controller
 {
@@ -26,8 +31,6 @@ class BarangController extends Controller
     {
         return view('dashboard.databarang');
     }
-
-    
 
    
     /**
@@ -103,7 +106,6 @@ class BarangController extends Controller
             'kode_barang' => 'required|string|max:255',
             'kode_kategori' => 'required|string|max:255|',
             'kode_supplier' => 'required|string|max:255|',
-            'foto_barang' => 'required|image|max:2048',
             'nama_barang' => 'required|string|max:255|',
             'stok_barang' => 'required|integer|',
             'satuan_barang' => 'required|string|max:255|',
@@ -159,12 +161,47 @@ class BarangController extends Controller
             }
             return '<img class="rounded-square" width="70" height="70" src="'. url($model->foto_barang) .'" alt="">';
         })
+
+        
+        
         ->addColumn('action', function($model){
-            return '<a href="#" class="btn"><i class="ace-icon fa fa-eye bigger-120"></i></a> ' .
+            return '<a href="{{ $url_show }}" class="btn"><i class="ace-icon fa fa-eye bigger-120"></i></a> ' .
                    '<a onclick="editForm('. $model->id_barang .')" class="btn"><i class="ace-icon fa fa-pencil bigger-120"></i> </a> ' .
                    '<a onclick="deleteData('. $model->id_barang .')" class="btn"><i class="ace-icon fa fa-trash-o bigger-120"> </a>';
         })
         
             ->rawColumns(['show_image','action'])->make(true);
     }
+
+    public function importExportView()
+
+    {
+
+       return view('import');
+
+    }
+
+    public function export() 
+
+    {
+
+        return Excel::download(new BarangExport, 'barang.xlsx');
+
+    }
+
+    public function import() 
+
+    {
+
+        Excel::import(new BarangImport,request()->file('file'));
+
+           
+
+        return back();
+
+    }
+
+   
 }
+
+

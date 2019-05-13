@@ -29,26 +29,13 @@
             </ul>
           </li>
           <li>
-            <a href="inbox.html">
-              <i class="fa fa-envelope"></i>
-              <span>Mail </span>
-              <span class="label label-theme pull-right mail-info">2</span>
-              </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;">
-              <i class=" fa fa-bar-chart-o"></i>
+            <a href="{{route ('chart.index')}}">
+              <i class="fa fa-bar-chart-o"></i>
               <span>Charts</span>
               </a>
-            <ul class="sub">
-              <li><a href="morris.html">Morris</a></li>
-              <li><a href="chartjs.html">Chartjs</a></li>
-              <li><a href="flot_chart.html">Flot Charts</a></li>
-              <li><a href="xchart.html">xChart</a></li>
-            </ul>
           </li>
           <li>
-            <a href="google_maps.html">
+            <a href="{{route ('gmap.index')}}">
               <i class="fa fa-map-marker"></i>
               <span>Google Maps </span>
               </a>

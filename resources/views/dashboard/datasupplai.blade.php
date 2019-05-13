@@ -95,7 +95,7 @@ var table =$('#datatable').DataTable({
               confirmButtonText: 'Yes, delete it!'
           }).then(function () {
               $.ajax({
-                  url : "{{ url('barang') }}" + '/' + id_supplai,
+                  url : "{{ url('supplaibarang') }}" + '/' + id_supplai,
                   type : "POST",
                   data : {'_method' : 'DELETE', '_token' : csrf_token},
                   success : function(data) {

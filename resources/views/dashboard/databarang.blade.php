@@ -6,8 +6,10 @@
         <div class="row mb">
           <!-- page start-->
           <div class="content-panel">
+          
             <div class="adv-table">
-            <a onclick="addForm()" class="btn btn-primary pull-left" style="margin-left: 8px; margin-top: 8px; margin-bottom: 8px;">Add Barang</a>
+            <a onclick="addForm()" class="btn btn-primary pull-left" style="margin-left: 8px; margin-top: 8px; margin-bottom: 8px;">Tambah Data Barang</a>
+            <a class="btn btn-warning pull-right" href="{{ route('export') }}">Export Data Barang</a>
               <table cellpadding="0" cellspacing="0" border="0" class="display table table-bordered" id="datatable">
                 <thead>
                   <tr>
@@ -29,6 +31,7 @@
             </div>
           </div>
         </div>
+        <
 </section>
 
 @include('dashboard.form_barang')
@@ -60,7 +63,7 @@
         $('input[name=_method]').val('POST');
         $('#modal-form').modal('show');
         $('#modal-form form')[0].reset();
-        $('.modal-title').text('Add Barang');
+        $('.modal-title').text('Tambah Data Barang');
       }
       function editForm(id_barang) {
         save_method = 'edit';
@@ -72,13 +75,13 @@
           dataType: "JSON",
           success: function(data) {
             $('#modal-form').modal('show');
-            $('.modal-title').text('Edit Barang');
+            $('.modal-title').text('Edit Data Barang');
             
             $('#id_barang').val(data.id_barang);
             $('#kode_barang').val(data.kode_barang);
             $('#kode_kategori').val(data.kode_kategori);
             $('#kode_supplier').val(data.kode_supplier);
-            $('#show_image').val(data.show_image);
+            $('#show_image').attr('src',"{{ asset('')}}"+data.foto_barang);  
             $('#nama_barang').val(data.nama_barang);
             $('#stok_barang').val(data.stok_barang);
             $('#satuan_barang').val(data.satuan_barang);

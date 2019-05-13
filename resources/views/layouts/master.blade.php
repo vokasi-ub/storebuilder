@@ -95,6 +95,9 @@
   <!--script for this page-->
   <script src="{{ asset ('assets/admin/lib/sparkline-chart.js') }}"></script>
   <script src="{{ asset ('assets/admin/lib/zabuto_calendar.js') }}"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false&libraries=geometry&v=3.7"></script>
+  <script src="{{asset ('assets/admin/lib/google-maps/maplace.js') }}"></script>
+  <script src="{{asset ('assets/admin/lib/google-maps/data/points.js') }}"></script>
 
   
 
