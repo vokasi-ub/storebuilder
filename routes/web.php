@@ -18,6 +18,7 @@
 
 /** Route Login */
 Auth::routes();
+Route::resource('/', 'HomeController');
 Route::get('/home', 'HomeController@index')->name('home');
 /** --------------------- */
 
